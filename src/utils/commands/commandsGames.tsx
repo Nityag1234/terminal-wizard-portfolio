@@ -1,9 +1,29 @@
 
 import React, { useState, useEffect } from 'react';
 
+// Define types for the game
+interface GameOption {
+  next: string;
+  text: string;
+  action?: () => string;
+}
+
+interface GameScene {
+  description: string;
+  options: Record<string, GameOption>;
+}
+
+interface GameState {
+  started: boolean;
+  currentScene: string;
+  inventory: string[];
+  health: number;
+  message?: string;
+}
+
 // A simple text-based adventure game
 export const gameCommand = (): React.ReactNode => {
-  const [gameState, setGameState] = useState({
+  const [gameState, setGameState] = useState<GameState>({
     started: false,
     currentScene: 'start',
     inventory: [],
@@ -11,7 +31,7 @@ export const gameCommand = (): React.ReactNode => {
   });
 
   // Game scenes/rooms configuration
-  const scenes = {
+  const scenes: Record<string, GameScene> = {
     start: {
       description: "You wake up in a mysterious terminal-like environment. There are two paths ahead: a green glowing corridor [green] and a red pulsating door [red].",
       options: {
@@ -56,8 +76,8 @@ export const gameCommand = (): React.ReactNode => {
 
   // Handle user choices
   const handleChoice = (choice: string) => {
-    const scene = scenes[gameState.currentScene as keyof typeof scenes];
-    const option = scene.options[choice as keyof typeof scene.options];
+    const scene = scenes[gameState.currentScene];
+    const option = scene.options[choice];
     
     if (option) {
       let message = '';
@@ -73,7 +93,7 @@ export const gameCommand = (): React.ReactNode => {
     }
   };
 
-  const currentScene = scenes[gameState.currentScene as keyof typeof scenes];
+  const currentScene = scenes[gameState.currentScene];
 
   // Start the game
   if (!gameState.started) {
@@ -125,4 +145,3 @@ export const gameCommand = (): React.ReactNode => {
     </div>
   );
 };
-
