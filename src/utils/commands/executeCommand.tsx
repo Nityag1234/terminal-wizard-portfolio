@@ -78,4 +78,3 @@ export const executeCommand = (commandLine: string, history: TerminalHistory[]):
       );
   }
 };
-

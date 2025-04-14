@@ -20,4 +20,3 @@ export const COMMANDS = [
   'theme',
   'game'
 ];
-
