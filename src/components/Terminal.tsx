@@ -36,6 +36,8 @@ const Terminal: React.FC = () => {
   // Handle command execution
   const handleCommand = (command: string) => {
     if (command.trim()) {
+      console.log('Executing command:', command); // Add log to debug
+      
       // Special case for 'clear' command
       if (command.trim().toLowerCase() === 'clear') {
         setHistory([]);
@@ -50,6 +52,7 @@ const Terminal: React.FC = () => {
 
       // Execute command and get output
       const output = executeCommand(command, history);
+      console.log('Command output:', output); // Add log to debug
 
       // Add command and output to terminal history
       setHistory(prevHistory => [

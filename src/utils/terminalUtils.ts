@@ -1,14 +1,19 @@
 
-import { COMMANDS } from './commands';
+import { COMMANDS } from './commands/commandsList';
 
 // Get command suggestions for tab completion
 export const getCommandSuggestions = (partialCommand: string): string => {
+  console.log('Getting suggestions for:', partialCommand); // Debug log
+  console.log('Available commands:', COMMANDS); // Debug log
+  
   const lowerPartialCommand = partialCommand.toLowerCase();
   
   // Find matching commands that start with the partial input
   const matchingCommands = COMMANDS.filter(cmd => 
     cmd.toLowerCase().startsWith(lowerPartialCommand)
   );
+  
+  console.log('Matching commands:', matchingCommands); // Debug log
   
   // If we have exactly one match, return it
   if (matchingCommands.length === 1) {

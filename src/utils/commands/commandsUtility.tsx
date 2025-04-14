@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { THEMES } from './commandsTheme';
+import { COMMANDS } from './commandsList';
 
 export const clearCommand = (): React.ReactNode => {
   // This will be handled in the Terminal component
@@ -101,21 +102,34 @@ export const echoCommand = (text: string): React.ReactNode => {
 };
 
 export const lsCommand = (): React.ReactNode => {
-  const sections = [
-    { name: 'about/', color: 'text-terminal-cyan' },
-    { name: 'projects/', color: 'text-terminal-green' },
-    { name: 'skills/', color: 'text-terminal-purple' },
-    { name: 'contact/', color: 'text-terminal-yellow' },
-    { name: 'resume.pdf', color: 'text-terminal-white' }
-  ];
+  // Create a mapping of command categories
+  const commandCategories = {
+    "about/": ["about"],
+    "projects/": ["projects"],
+    "skills/": ["skills"],
+    "contact/": ["contact"],
+    "resume.pdf": ["resume"],
+    "utility/": ["help", "clear", "man", "echo", "ls", "exit"],
+    "links/": ["github", "linkedin", "email"],
+    "fun/": ["weather", "theme", "game", "sudo"]
+  };
 
   return (
     <div>
       <div className="text-terminal-yellow mb-2">Listing contents of ~/portfolio:</div>
       <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
-        {sections.map((section, index) => (
-          <div key={index} className={`${section.color}`}>
-            {section.name}
+        {Object.entries(commandCategories).map(([category, _commands], index) => (
+          <div key={index} className={category.includes("resume") ? "text-terminal-white" : "text-terminal-cyan"}>
+            {category}
+          </div>
+        ))}
+      </div>
+      
+      <div className="mt-4 text-terminal-yellow">Available commands:</div>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+        {COMMANDS.map((cmd, index) => (
+          <div key={index} className="text-terminal-green">
+            {cmd}
           </div>
         ))}
       </div>

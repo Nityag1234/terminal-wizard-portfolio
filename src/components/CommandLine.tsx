@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { getCommandSuggestions } from '../utils/terminalUtils';
 
@@ -23,6 +24,7 @@ const CommandLine: React.FC<CommandLineProps> = ({ onCommand, onHistoryNavigatio
     switch (e.key) {
       case 'Enter':
         e.preventDefault();
+        console.log('Submitting command:', input); // Debug log
         onCommand(input);
         setInput('');
         setSuggestion('');
@@ -77,7 +79,7 @@ const CommandLine: React.FC<CommandLineProps> = ({ onCommand, onHistoryNavigatio
         <input
           ref={inputRef}
           type="text"
-          className="terminal-input"
+          className="terminal-input w-full bg-transparent border-none outline-none text-terminal-text"
           value={input}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}

@@ -30,8 +30,11 @@ export type TerminalHistory = {
 
 // Execute commands and return output
 export const executeCommand = (commandLine: string, history: TerminalHistory[]): React.ReactNode => {
+  console.log('Command received:', commandLine); // Debug log
   const args = commandLine.trim().split(' ');
   const command = args[0].toLowerCase();
+  
+  console.log('Processing command:', command, 'with args:', args.slice(1)); // Debug log
   
   switch (command) {
     case 'about':
@@ -65,10 +68,13 @@ export const executeCommand = (commandLine: string, history: TerminalHistory[]):
     case 'email':
       return emailCommand();
     case 'weather':
+      console.log('Weather command called with arg:', args[1]); // Debug log
       return weatherCommand(args[1]);
     case 'theme':
+      console.log('Theme command called with arg:', args[1]); // Debug log
       return themeCommand(args[1]);
     case 'game':
+      console.log('Game command called'); // Debug log
       return gameCommand();
     default:
       return (
