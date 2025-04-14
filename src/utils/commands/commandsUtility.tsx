@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { THEMES } from './commandsTheme';
 
 export const clearCommand = (): React.ReactNode => {
   // This will be handled in the Terminal component
@@ -54,6 +55,36 @@ export const manCommand = (command?: string): React.ReactNode => {
         <p>help</p>
         <div className="text-terminal-green">DESCRIPTION</div>
         <p>Shows a list of available commands with brief descriptions.</p>
+      </div>
+    ),
+    weather: (
+      <div className="space-y-2">
+        <div className="text-terminal-green">NAME</div>
+        <p>weather - check weather information</p>
+        <div className="text-terminal-green">SYNOPSIS</div>
+        <p>weather [city]</p>
+        <div className="text-terminal-green">DESCRIPTION</div>
+        <p>Shows current weather conditions for a specified city. If no city is provided, defaults to London.</p>
+      </div>
+    ),
+    theme: (
+      <div className="space-y-2">
+        <div className="text-terminal-green">NAME</div>
+        <p>theme - change terminal appearance</p>
+        <div className="text-terminal-green">SYNOPSIS</div>
+        <p>theme [theme-name]</p>
+        <div className="text-terminal-green">DESCRIPTION</div>
+        <p>Changes the color scheme of the terminal. Available themes: {THEMES.join(', ')}</p>
+      </div>
+    ),
+    game: (
+      <div className="space-y-2">
+        <div className="text-terminal-green">NAME</div>
+        <p>game - play a text adventure</p>
+        <div className="text-terminal-green">SYNOPSIS</div>
+        <p>game</p>
+        <div className="text-terminal-green">DESCRIPTION</div>
+        <p>Launches a simple text-based adventure game in the terminal.</p>
       </div>
     )
   };

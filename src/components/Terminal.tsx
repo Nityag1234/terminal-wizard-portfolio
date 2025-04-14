@@ -12,7 +12,11 @@ type TerminalHistory = {
 
 const Terminal: React.FC = () => {
   const [history, setHistory] = useState<TerminalHistory[]>([]);
-  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [commandHistory, setCommandHistory] = useState<string[]>(() => {
+    // Load command history from localStorage if available
+    const savedHistory = localStorage.getItem('terminalCommandHistory');
+    return savedHistory ? JSON.parse(savedHistory) : [];
+  });
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [bootComplete, setBootComplete] = useState(false);
   const terminalRef = useRef<HTMLDivElement>(null);
@@ -24,11 +28,24 @@ const Terminal: React.FC = () => {
     }
   }, [history]);
 
+  // Save command history to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem('terminalCommandHistory', JSON.stringify(commandHistory.slice(0, 50))); // Limit to last 50 commands
+  }, [commandHistory]);
+
   // Handle command execution
   const handleCommand = (command: string) => {
     if (command.trim()) {
-      // Add to command history
-      setCommandHistory(prev => [command, ...prev]);
+      // Special case for 'clear' command
+      if (command.trim().toLowerCase() === 'clear') {
+        setHistory([]);
+        return;
+      }
+
+      // Add to command history (avoid duplicates at the top)
+      if (commandHistory.length === 0 || commandHistory[0] !== command) {
+        setCommandHistory(prev => [command, ...prev]);
+      }
       setHistoryIndex(-1);
 
       // Execute command and get output

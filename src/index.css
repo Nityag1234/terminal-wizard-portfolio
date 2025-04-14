@@ -50,6 +50,17 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* Terminal Colors */
+    --terminal-background: #1a1b26;
+    --terminal-text: #a9b1d6;
+    --terminal-green: #9ece6a;
+    --terminal-cyan: #7dcfff;
+    --terminal-yellow: #e0af68;
+    --terminal-red: #f7768e;
+    --terminal-purple: #bb9af7;
+    --terminal-white: #c0caf5;
+    --terminal-comment: #565f89;
   }
 
   .dark {
@@ -176,6 +187,11 @@
   .text-glow-red {
     text-shadow: 0 0 5px rgba(255, 92, 92, 0.5);
   }
+  
+  /* Add animations for theme transitions */
+  .theme-transition {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 }
 
 @font-face {
@@ -183,3 +199,32 @@
   src: url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
   font-display: swap;
 }
+
+/* Animation for terminal cursor blinking */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-cursor-blink {
+  animation: cursor-blink 1s infinite;
+}
+
+/* Animation for fade in */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-in;
+}
+
+/* Add theme transition classes */
+[data-theme="dark"], 
+[data-theme="light"], 
+[data-theme="matrix"], 
+[data-theme="retro"] {
+  transition: all 0.3s ease;
+}
+

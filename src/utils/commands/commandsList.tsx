@@ -15,5 +15,9 @@ export const COMMANDS = [
   'resume',
   'github',
   'linkedin',
-  'email'
+  'email',
+  'weather',
+  'theme',
+  'game'
 ];
+

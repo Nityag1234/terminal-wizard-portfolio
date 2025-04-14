@@ -19,6 +19,9 @@ import {
   linkedinCommand, 
   emailCommand 
 } from './commandsLinks';
+import { weatherCommand } from './commandsWeather';
+import { themeCommand } from './commandsTheme';
+import { gameCommand } from './commandsGames';
 
 export type TerminalHistory = {
   input?: string;
@@ -61,6 +64,12 @@ export const executeCommand = (commandLine: string, history: TerminalHistory[]):
       return linkedinCommand();
     case 'email':
       return emailCommand();
+    case 'weather':
+      return weatherCommand(args[1]);
+    case 'theme':
+      return themeCommand(args[1]);
+    case 'game':
+      return gameCommand();
     default:
       return (
         <span className="text-terminal-red">
@@ -69,3 +78,4 @@ export const executeCommand = (commandLine: string, history: TerminalHistory[]):
       );
   }
 };
+
