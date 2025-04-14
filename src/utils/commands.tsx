@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 type TerminalHistory = {
@@ -7,7 +6,7 @@ type TerminalHistory = {
 };
 
 // Available commands
-const COMMANDS = [
+export const COMMANDS = [
   'about',
   'projects',
   'skills',
