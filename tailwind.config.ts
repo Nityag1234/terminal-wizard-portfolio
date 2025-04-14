@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -18,7 +19,21 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				mono: ['Fira Code', 'JetBrains Mono', 'monospace'],
+			},
 			colors: {
+				terminal: {
+					background: '#1A1F2C',
+					text: '#33C3F0',
+					green: '#5CFF87',
+					yellow: '#FFCC5C',
+					red: '#FF5C5C',
+					purple: '#9B87F5',
+					cyan: '#33C3F0',
+					white: '#F1F0FB',
+					comment: '#8E9196',
+				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
@@ -63,33 +78,45 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
-			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
-			},
 			keyframes: {
+				blink: {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0' },
+				},
+				'fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' },
+				},
+				'cursor-blink': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0' },
+				},
+				'loading-bar': {
+					'0%': { width: '0%' },
+					'100%': { width: '100%' },
+				},
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' },
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
-				}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' },
+				},
+				typing: {
+					'0%': { width: '0' },
+					'100%': { width: '100%' },
+				},
 			},
 			animation: {
+				blink: 'blink 1s step-start infinite',
+				'fade-in': 'fade-in 0.5s ease-in-out',
+				'cursor-blink': 'cursor-blink 1s step-end infinite',
+				'loading-bar': 'loading-bar 2s ease-in-out forwards',
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				typing: 'typing 3.5s steps(40, end)',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
