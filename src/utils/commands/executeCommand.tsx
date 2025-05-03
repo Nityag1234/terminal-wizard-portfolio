@@ -36,51 +36,60 @@ export const executeCommand = (commandLine: string, history: TerminalHistory[]):
   
   console.log('Processing command:', command, 'with args:', args.slice(1)); // Debug log
   
-  switch (command) {
-    case 'about':
-      return aboutCommand();
-    case 'projects':
-      return projectsCommand();
-    case 'skills':
-      return skillsCommand();
-    case 'contact':
-      return contactCommand();
-    case 'help':
-      return helpCommand();
-    case 'clear':
-      return clearCommand();
-    case 'man':
-      return manCommand(args[1]);
-    case 'echo':
-      return echoCommand(args.slice(1).join(' '));
-    case 'ls':
-      return lsCommand();
-    case 'sudo':
-      return sudoCommand(args.slice(1).join(' '));
-    case 'exit':
-      return exitCommand();
-    case 'resume':
-      return resumeCommand();
-    case 'github':
-      return githubCommand();
-    case 'linkedin':
-      return linkedinCommand();
-    case 'email':
-      return emailCommand();
-    case 'weather':
-      console.log('Weather command called with arg:', args[1]); // Debug log
-      return weatherCommand(args[1]);
-    case 'theme':
-      console.log('Theme command called with arg:', args[1]); // Debug log
-      return themeCommand(args[1]);
-    case 'game':
-      console.log('Game command called'); // Debug log
-      return gameCommand();
-    default:
-      return (
-        <span className="text-terminal-red">
-          Command not found: {command}. Type <span className="text-terminal-cyan">help</span> for a list of available commands.
-        </span>
-      );
+  try {
+    switch (command) {
+      case 'about':
+        return aboutCommand();
+      case 'projects':
+        return projectsCommand();
+      case 'skills':
+        return skillsCommand();
+      case 'contact':
+        return contactCommand();
+      case 'help':
+        return helpCommand();
+      case 'clear':
+        return clearCommand();
+      case 'man':
+        return manCommand(args[1]);
+      case 'echo':
+        return echoCommand(args.slice(1).join(' '));
+      case 'ls':
+        return lsCommand();
+      case 'sudo':
+        return sudoCommand(args.slice(1).join(' '));
+      case 'exit':
+        return exitCommand();
+      case 'resume':
+        return resumeCommand();
+      case 'github':
+        return githubCommand();
+      case 'linkedin':
+        return linkedinCommand();
+      case 'email':
+        return emailCommand();
+      case 'weather':
+        console.log('Weather command called with arg:', args[1]); // Debug log
+        return weatherCommand(args[1]);
+      case 'theme':
+        console.log('Theme command called with arg:', args[1]); // Debug log
+        return themeCommand(args[1]);
+      case 'game':
+        console.log('Game command called'); // Debug log
+        return gameCommand();
+      default:
+        return (
+          <span className="text-terminal-red">
+            Command not found: {command}. Type <span className="text-terminal-cyan">help</span> for a list of available commands.
+          </span>
+        );
+    }
+  } catch (error) {
+    console.error('Error executing command:', command, error);
+    return (
+      <span className="text-terminal-red">
+        Error executing command: {command}
+      </span>
+    );
   }
 };

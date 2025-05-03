@@ -44,12 +44,9 @@ const applyTheme = (theme: string): React.ReactNode => {
     );
   }
 
-  // In a real app, we would have a theme context/provider
-  // Here we'll use data attributes on the body element for demonstration
-  document.body.setAttribute('data-theme', theme);
-
-  // Apply some basic theme changes
+  // Apply theme changes directly to CSS variables
   const rootEl = document.documentElement;
+  document.body.setAttribute('data-theme', theme);
   
   switch (theme) {
     case 'dark':
@@ -59,6 +56,8 @@ const applyTheme = (theme: string): React.ReactNode => {
       rootEl.style.setProperty('--terminal-cyan', '#7dcfff');
       rootEl.style.setProperty('--terminal-yellow', '#e0af68');
       rootEl.style.setProperty('--terminal-red', '#f7768e');
+      rootEl.style.setProperty('--terminal-purple', '#bb9af7');
+      rootEl.style.setProperty('--terminal-comment', '#565f89');
       break;
     case 'light':
       rootEl.style.setProperty('--terminal-background', '#f5f5f5');
@@ -67,6 +66,8 @@ const applyTheme = (theme: string): React.ReactNode => {
       rootEl.style.setProperty('--terminal-cyan', '#00acc1');
       rootEl.style.setProperty('--terminal-yellow', '#ff9800');
       rootEl.style.setProperty('--terminal-red', '#f44336');
+      rootEl.style.setProperty('--terminal-purple', '#9c27b0');
+      rootEl.style.setProperty('--terminal-comment', '#9e9e9e');
       break;
     case 'matrix':
       rootEl.style.setProperty('--terminal-background', '#000000');
@@ -75,6 +76,8 @@ const applyTheme = (theme: string): React.ReactNode => {
       rootEl.style.setProperty('--terminal-cyan', '#00ffff');
       rootEl.style.setProperty('--terminal-yellow', '#96ff00');
       rootEl.style.setProperty('--terminal-red', '#ff3300');
+      rootEl.style.setProperty('--terminal-purple', '#cc00ff');
+      rootEl.style.setProperty('--terminal-comment', '#006600');
       break;
     case 'retro':
       rootEl.style.setProperty('--terminal-background', '#2d2b55');
@@ -83,8 +86,13 @@ const applyTheme = (theme: string): React.ReactNode => {
       rootEl.style.setProperty('--terminal-cyan', '#88deff');
       rootEl.style.setProperty('--terminal-yellow', '#ffcc00');
       rootEl.style.setProperty('--terminal-red', '#ff628c');
+      rootEl.style.setProperty('--terminal-purple', '#c678dd');
+      rootEl.style.setProperty('--terminal-comment', '#b0b0b0');
       break;
   }
+
+  // Force the page to reapply styles by triggering a reflow
+  void document.body.offsetHeight;
 
   return (
     <div className="text-terminal-green">
@@ -92,4 +100,3 @@ const applyTheme = (theme: string): React.ReactNode => {
     </div>
   );
 };
-

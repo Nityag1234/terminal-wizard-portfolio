@@ -3,9 +3,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import CommandLine from './CommandLine';
 import TerminalOutput from './TerminalOutput';
 import BootSequence from './BootSequence';
-import { executeCommand } from '../utils/commands';
+import { executeCommand } from '../utils/commands/executeCommand';
 
-type TerminalHistory = {
+export type TerminalHistory = {
   input?: string;
   output: React.ReactNode;
 };
@@ -32,6 +32,20 @@ const Terminal: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('terminalCommandHistory', JSON.stringify(commandHistory.slice(0, 50))); // Limit to last 50 commands
   }, [commandHistory]);
+
+  // Apply default theme on load
+  useEffect(() => {
+    // Set default theme
+    const rootEl = document.documentElement;
+    rootEl.style.setProperty('--terminal-background', '#1a1b26');
+    rootEl.style.setProperty('--terminal-text', '#a9b1d6');
+    rootEl.style.setProperty('--terminal-green', '#9ece6a');
+    rootEl.style.setProperty('--terminal-cyan', '#7dcfff');
+    rootEl.style.setProperty('--terminal-yellow', '#e0af68');
+    rootEl.style.setProperty('--terminal-red', '#f7768e');
+    rootEl.style.setProperty('--terminal-purple', '#bb9af7');
+    rootEl.style.setProperty('--terminal-comment', '#565f89');
+  }, []);
 
   // Handle command execution
   const handleCommand = (command: string) => {
@@ -121,9 +135,15 @@ const Terminal: React.FC = () => {
               </span>
               <span 
                 className="command-button"
-                onClick={() => handleCommand('help')}
+                onClick={() => handleCommand('theme')}
               >
-                help
+                theme
+              </span>
+              <span 
+                className="command-button"
+                onClick={() => handleCommand('game')}
+              >
+                game
               </span>
             </div>
           </div>
